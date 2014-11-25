@@ -20,5 +20,10 @@ namespace PoqketNote
         {
             InitializeComponent();
         }
+
+        private void scrollview1_KeyDown(object sender, KeyEventArgs e)
+        {
+            scrollview1.ScrollToVerticalOffset(scrollview1.VerticalOffset + 60);
+        }
     }
 }
