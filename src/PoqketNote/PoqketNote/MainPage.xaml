@@ -6,12 +6,12 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot は、すべてのページ コンテンツが配置されるルート グリッドです-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -33,10 +33,10 @@
             <StackPanel>
                 <TextBlock FontSize="24" Text="ファイル名" Margin="0,30,0,0" />
                 <TextBox x:Name="filenameTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Width="455"/>
-                <TextBlock FontSize="24" Text="テキスト" Margin="0,10,0,0"/>
+                <TextBlock FontSize="24" Text="テキスト" Margin="0,10,0,0" LostFocus="TextBlock_LostFocus" GotFocus="TextBlock_GotFocus" />
                 <StackPanel Height="525">
                     <ScrollViewer Height="525" x:Name="scrollview1" VerticalScrollBarVisibility="Auto" KeyDown="scrollview1_KeyDown">
-                        <TextBox x:Name="mainTextBox" Margin="0,0,0,0" AcceptsReturn="True" Width="455" Height="Auto"  HorizontalAlignment="Left" VerticalAlignment="Stretch" />
+                        <TextBox x:Name="mainTextBox" Margin="0,0,0,0" AcceptsReturn="True" Width="455" Height="Auto"  HorizontalAlignment="Left" VerticalAlignment="Stretch" GotFocus="mainTextBox_GotFocus" LostFocus="mainTextBox_LostFocus" />
                     </ScrollViewer>
                 </StackPanel>
             </StackPanel>
@@ -44,15 +44,17 @@
     </Grid>
  
     <!--ApplicationBar の使用法を示すサンプル コード-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
+    <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.check.rest.png" Text="保存"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.save.rest.png" Text="開く"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.close.rest.png" Text="閉じる"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.download.rest.png" Text="キーを隠す" Click="ApplicationBarIconButton3_Click" />
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+                <shell:ApplicationBarMenuItem Text="設定"/>
+                <shell:ApplicationBarMenuItem Text="バージョン"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
