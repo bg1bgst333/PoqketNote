@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -64,6 +67,21 @@ namespace PoqketNote
         private void ApplicationBarIconButton3_Click(object sender, EventArgs e)
         {
             this.Focus();
+        }
+
+        private void ApplicationBarIconButton0_Click(object sender, EventArgs e)
+        {
+            IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
+            IsolatedStorageFileStream stream = storage.OpenFile(filenameTextBox.Text, FileMode.Create);
+            StreamWriter sw = new StreamWriter(stream, Encoding.UTF8);
+            sw.Write(mainTextBox.Text);
+            sw.Close();
+            stream.Close();
+        }
+
+        private void ApplicationBarIconButton1_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/FileListPage.xaml?", UriKind.Relative));
         }
     }
 }
