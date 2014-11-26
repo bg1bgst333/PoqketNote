@@ -32,7 +32,7 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
                 <TextBlock FontSize="24" Text="ファイル名" Margin="0,30,0,0" />
-                <TextBox x:Name="filenameTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Width="455"/>
+                <TextBox x:Name="filenameTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Width="455" GotFocus="filenameTextBox_GotFocus" LostFocus="filenameTextBox_LostFocus" />
                 <TextBlock FontSize="24" Text="テキスト" Margin="0,10,0,0" LostFocus="TextBlock_LostFocus" GotFocus="TextBlock_GotFocus" />
                 <StackPanel Height="525">
                     <ScrollViewer Height="525" x:Name="scrollview1" VerticalScrollBarVisibility="Auto" KeyDown="scrollview1_KeyDown">

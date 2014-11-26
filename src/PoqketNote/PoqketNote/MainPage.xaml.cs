@@ -65,6 +65,13 @@ namespace PoqketNote
 
         private void mainTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            ApplicationBar = new ApplicationBar();
+
+            ApplicationBarIconButton hidekeybtn = new ApplicationBarIconButton();
+            hidekeybtn.IconUri = new Uri("/icons/appbar.download.rest.png", UriKind.Relative);
+            hidekeybtn.Text = "キーボードを閉じる";
+            ApplicationBar.Buttons.Add(hidekeybtn);
+            hidekeybtn.Click += new EventHandler(HideKeyButton_Click);
             /*
             ((ApplicationBarIconButton)ApplicationBar.Buttons[0]).IsEnabled = false;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).IsEnabled = false;
@@ -75,6 +82,19 @@ namespace PoqketNote
 
         private void mainTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            ApplicationBar = new ApplicationBar();
+
+            ApplicationBarIconButton savebtn = new ApplicationBarIconButton();
+            savebtn.IconUri = new Uri("/icons/appbar.save.rest.png", UriKind.Relative);
+            savebtn.Text = "保存";
+            ApplicationBar.Buttons.Add(savebtn);
+            savebtn.Click += new EventHandler(SaveButton_Click);
+
+            ApplicationBarIconButton loadbtn = new ApplicationBarIconButton();
+            loadbtn.IconUri = new Uri("/icons/appbar.list.rest.png", UriKind.Relative);
+            loadbtn.Text = "開く";
+            ApplicationBar.Buttons.Add(loadbtn);
+            loadbtn.Click += new EventHandler(LoadButton_Click);
             /*
             ((ApplicationBarIconButton)ApplicationBar.Buttons[0]).IsEnabled = true;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).IsEnabled = true;
@@ -128,6 +148,11 @@ namespace PoqketNote
             */
         }
 
+        private void HideKeyButton_Click(object sender, EventArgs e)
+        {
+            this.Focus();
+        }
+
         private void ApplicationBarIconButton2_Click(object sender, EventArgs e)
         {
 
@@ -136,6 +161,34 @@ namespace PoqketNote
         private void ApplicationBarIconButton3_Click(object sender, EventArgs e)
         {
             this.Focus();
+        }
+
+        private void filenameTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ApplicationBar = new ApplicationBar();
+
+            ApplicationBarIconButton hidekeybtn = new ApplicationBarIconButton();
+            hidekeybtn.IconUri = new Uri("/icons/appbar.download.rest.png", UriKind.Relative);
+            hidekeybtn.Text = "キーボードを閉じる";
+            ApplicationBar.Buttons.Add(hidekeybtn);
+            hidekeybtn.Click += new EventHandler(HideKeyButton_Click);
+        }
+
+        private void filenameTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ApplicationBar = new ApplicationBar();
+
+            ApplicationBarIconButton savebtn = new ApplicationBarIconButton();
+            savebtn.IconUri = new Uri("/icons/appbar.save.rest.png", UriKind.Relative);
+            savebtn.Text = "保存";
+            ApplicationBar.Buttons.Add(savebtn);
+            savebtn.Click += new EventHandler(SaveButton_Click);
+
+            ApplicationBarIconButton loadbtn = new ApplicationBarIconButton();
+            loadbtn.IconUri = new Uri("/icons/appbar.list.rest.png", UriKind.Relative);
+            loadbtn.Text = "開く";
+            ApplicationBar.Buttons.Add(loadbtn);
+            loadbtn.Click += new EventHandler(LoadButton_Click);
         }
     }
 }
