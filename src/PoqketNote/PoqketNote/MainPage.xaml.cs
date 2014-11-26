@@ -138,7 +138,7 @@ namespace PoqketNote
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/FileListPage.xaml?", UriKind.Relative));
         }
 
         private void ApplicationBarIconButton1_Click(object sender, EventArgs e)

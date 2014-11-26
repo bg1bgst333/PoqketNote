@@ -22,6 +22,8 @@ namespace PoqketNote
             InitializeComponent();
         }
 
+        public string flmessage;
+
         private void listBox1_Loaded(object sender, RoutedEventArgs e)
         {
             IsolatedStorageFile storage = null;
@@ -33,7 +35,8 @@ namespace PoqketNote
                 string[] filearray = storage.GetFileNames();
                 //string[] s;
                 //s = d;
-                if (filearray.Length > 0){
+                if (filearray.Length > 0)
+                {
                     foreach (var f in filearray)
                     {
                         //DateTime dt = File.GetLastWriteTime();
@@ -42,8 +45,15 @@ namespace PoqketNote
                         fd.FileName = f;
                         fl.Files.Add(fd);
                     }
+                    flmessage = "読み込むファイルを選択してください";
+                }
+                else
+                {
+                    flmessage = "ファイルがありません";
                 }
                 listBox1.DataContext = fl;
+                msgtext1.Text = flmessage;
+                //msgtext1.Visibility = Visibility.Visible;
             }
             catch(Exception ex)
             {

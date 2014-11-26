@@ -30,16 +30,19 @@
 
         <!--ContentPanel - 追加コンテンツをここに入力します-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox Height="128" ItemsSource="{Binding Files}"  HorizontalAlignment="Center" Margin="0,20,0,5" x:Name="listBox1" VerticalAlignment="Top" Width="363" Loaded="listBox1_Loaded">
+            <TextBlock x:Name="msgtext1" Visibility="Collapsed"></TextBlock>
+            <ListBox Height="Auto" ItemsSource="{Binding Files}"  HorizontalAlignment="Center"  Margin="0,20,0,0" x:Name="listBox1" VerticalAlignment="Center" Width="440" Loaded="listBox1_Loaded">
                 <ListBox.Template>
                     <ControlTemplate TargetType="ListBox">
-                        <Grid>
+                        <Grid Height="Auto" Width="Auto">
                             <Border BorderThickness="5">
                                 <Border.BorderBrush>
                                     <SolidColorBrush Color="SkyBlue" />
                                 </Border.BorderBrush>
-                            </Border>
-                            <ItemsPresenter Margin="20,20,0,0"/>
+                            </Border> 
+                            <TextBlock Text="{Binding ElementName=msgtext1, Path=Text}" Margin="20" HorizontalAlignment="Center" FontSize="22">
+                            </TextBlock>
+                            <ItemsPresenter Margin="20,60,0,0"/>
                         </Grid>
                     </ControlTemplate>
                 </ListBox.Template>
