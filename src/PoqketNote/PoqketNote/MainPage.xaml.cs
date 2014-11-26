@@ -32,10 +32,25 @@ namespace PoqketNote
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            ApplicationBar = new ApplicationBar();
+
+            ApplicationBarIconButton savebtn = new ApplicationBarIconButton();
+            savebtn.IconUri = new Uri("/icons/appbar.save.rest.png", UriKind.Relative);
+            savebtn.Text = "保存";
+            ApplicationBar.Buttons.Add(savebtn);
+            savebtn.Click += new EventHandler(SaveButton_Click);
+
+            ApplicationBarIconButton loadbtn = new ApplicationBarIconButton();
+            loadbtn.IconUri = new Uri("/icons/appbar.list.rest.png", UriKind.Relative);
+            loadbtn.Text = "開く";
+            ApplicationBar.Buttons.Add(loadbtn);
+            loadbtn.Click += new EventHandler(LoadButton_Click);
+            /*
             ((ApplicationBarIconButton)ApplicationBar.Buttons[0]).IsEnabled = true;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).IsEnabled = true;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[2]).IsEnabled = true;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[3]).IsEnabled = false;
+             */
         }
 
         private void TextBlock_LostFocus(object sender, RoutedEventArgs e)
@@ -50,38 +65,61 @@ namespace PoqketNote
 
         private void mainTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            /*
             ((ApplicationBarIconButton)ApplicationBar.Buttons[0]).IsEnabled = false;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).IsEnabled = false;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[2]).IsEnabled = false;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[3]).IsEnabled = true;
+            */
         }
 
         private void mainTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            /*
             ((ApplicationBarIconButton)ApplicationBar.Buttons[0]).IsEnabled = true;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).IsEnabled = true;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[2]).IsEnabled = true;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[3]).IsEnabled = false;
+            */
         }
 
-        private void ApplicationBarIconButton3_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
-            this.Focus();
+
         }
 
         private void ApplicationBarIconButton0_Click(object sender, EventArgs e)
         {
+            /*
             IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
             IsolatedStorageFileStream stream = storage.OpenFile(filenameTextBox.Text, FileMode.Create);
             StreamWriter sw = new StreamWriter(stream, Encoding.UTF8);
             sw.Write(mainTextBox.Text);
             sw.Close();
             stream.Close();
+            */
+        }
+
+        private void LoadButton_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void ApplicationBarIconButton1_Click(object sender, EventArgs e)
         {
+            /*
             NavigationService.Navigate(new Uri("/FileListPage.xaml?", UriKind.Relative));
+            */
+        }
+
+        private void ApplicationBarIconButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ApplicationBarIconButton3_Click(object sender, EventArgs e)
+        {
+            this.Focus();
         }
     }
 }
