@@ -85,7 +85,23 @@ namespace PoqketNote
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            if (filenameTextBox.Text == "")
+            {
+                MessageBox.Show("ファイル名が入力されていません");
+                return;
+            }
 
+            IsolatedStorageFile storage = null;
+            IsolatedStorageFileStream stream = null;
+            StreamWriter sw = null;
+
+            storage = IsolatedStorageFile.GetUserStoreForApplication();
+
+            using(stream = storage.OpenFile(filenameTextBox.Text, FileMode.Create))
+            using(sw = new StreamWriter(stream))
+            {
+                sw.Write(mainTextBox.Text);
+            }
         }
 
         private void ApplicationBarIconButton0_Click(object sender, EventArgs e)
