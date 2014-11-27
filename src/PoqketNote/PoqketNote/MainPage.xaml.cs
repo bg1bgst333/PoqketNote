@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -189,6 +190,32 @@ namespace PoqketNote
             loadbtn.Text = "開く";
             ApplicationBar.Buttons.Add(loadbtn);
             loadbtn.Click += new EventHandler(LoadButton_Click);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            string path;
+
+            base.OnNavigatedTo(e);
+
+            if (NavigationContext.QueryString.TryGetValue("path", out path))
+            {
+
+                IsolatedStorageFile storage = null;
+                IsolatedStorageFileStream stream = null;
+                StreamReader sr = null;
+
+                storage = IsolatedStorageFile.GetUserStoreForApplication();
+
+                using (stream = storage.OpenFile(path, FileMode.Open))
+                using (sr = new StreamReader(stream))
+                {
+                    mainTextBox.Text = sr.ReadToEnd();
+                    filenameTextBox.Text = path;
+                }
+
+            }
+
         }
     }
 }

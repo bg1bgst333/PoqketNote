@@ -28,40 +28,50 @@ namespace PoqketNote
         {
             IsolatedStorageFile storage = null;
             FileList fl = new FileList();
-            try
-            {
-                storage = IsolatedStorageFile.GetUserStoreForApplication();
-                //string[] d = storage.GetDirectoryNames();
-                string[] filearray = storage.GetFileNames();
+            //try
+            //{
+            storage = IsolatedStorageFile.GetUserStoreForApplication();
+            //string[] d = storage.GetDirectoryNames();
+            string[] filearray = storage.GetFileNames();
                 //string[] s;
                 //s = d;
-                if (filearray.Length > 0)
+            if (filearray.Length > 0)
+            {
+                foreach (var f in filearray)
                 {
-                    foreach (var f in filearray)
-                    {
-                        //DateTime dt = File.GetLastWriteTime();
-                        FileData fd = new FileData();
-                        //fd.Updated = dt;
-                        fd.FileName = f;
-                        fl.Files.Add(fd);
-                    }
-                    flmessage = "読み込むファイルを選択してください";
+                    //DateTime dt = File.GetLastWriteTime();
+                    FileData fd = new FileData();
+                    //fd.Updated = dt;
+                    fd.FileName = f;
+                    fl.Files.Add(fd);
                 }
-                else
-                {
-                    flmessage = "ファイルがありません";
-                }
-                listBox1.DataContext = fl;
-                msgtext1.Text = flmessage;
+                flmessage = "読み込むファイルを選択してください";
+            }
+            else
+            {
+                flmessage = "ファイルがありません";
+            }
+            listBox1.DataContext = fl;
+            msgtext1.Text = flmessage;
                 //msgtext1.Visibility = Visibility.Visible;
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
+            //}
+            //catch(Exception ex)
+            //{
+                //MessageBox.Show(ex.ToString());
+
+            //}
+            //finally
+            //{
                 
+            //}
+        }
+
+        private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FileData fd = (FileData)listBox1.SelectedItem;
+            if (fd != null)
+            {
+                NavigationService.Navigate(new Uri("/MainPage.xaml?path=" + fd.FileName, UriKind.Relative));
             }
         }
     }
