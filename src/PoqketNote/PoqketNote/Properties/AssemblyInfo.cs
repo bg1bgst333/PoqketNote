@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("PoqketNote")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sofmap PC")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PoqketNote")]
-[assembly: AssemblyCopyright("Copyright © Sofmap PC 2014")]
+[assembly: AssemblyCopyright("Copyright (C) 2014- B.G, All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Resources;
 //
 // すべての値を指定するか、次のように '*' を使ってリビジョンおよびビルド番号を 
 // 既定値にすることができます。
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.0.0.0")]
+[assembly: AssemblyFileVersion("0.0.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("ja-JP")]

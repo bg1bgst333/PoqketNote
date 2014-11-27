@@ -23,17 +23,17 @@
         <!--TitlePanel は、アプリケーション名とページ タイトルを格納します-->
         <!--
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="マイ アプリケーション" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="PoqketNote" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="ページ名" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
         -->
-
         <!--ContentPanel - 追加コンテンツをここに入力します-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <TextBlock FontSize="24" Text="ファイル名" Margin="0,30,0,0" />
+                <TextBlock x:Name="ApplicationTitle" Text="PoqketNote" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock FontSize="22" Text="ファイル名" Margin="0,0,0,0" />
                 <TextBox x:Name="filenameTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Width="455" GotFocus="filenameTextBox_GotFocus" LostFocus="filenameTextBox_LostFocus" />
-                <TextBlock FontSize="24" Text="テキスト" Margin="0,10,0,0" LostFocus="TextBlock_LostFocus" GotFocus="TextBlock_GotFocus" />
+                <TextBlock FontSize="22" Text="テキスト" Margin="0,0,0,0" LostFocus="TextBlock_LostFocus" GotFocus="TextBlock_GotFocus" />
                 <StackPanel Height="525">
                     <ScrollViewer Height="525" x:Name="scrollview1" VerticalScrollBarVisibility="Auto" KeyDown="scrollview1_KeyDown">
                         <TextBox x:Name="mainTextBox" Margin="0,0,0,0" AcceptsReturn="True" Width="455" Height="Auto"  HorizontalAlignment="Left" VerticalAlignment="Stretch" GotFocus="mainTextBox_GotFocus" LostFocus="mainTextBox_LostFocus" />

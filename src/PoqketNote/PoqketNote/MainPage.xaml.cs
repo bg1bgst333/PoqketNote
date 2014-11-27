@@ -46,6 +46,11 @@ namespace PoqketNote
             loadbtn.Text = "開く";
             ApplicationBar.Buttons.Add(loadbtn);
             loadbtn.Click += new EventHandler(LoadButton_Click);
+
+            ApplicationBarMenuItem aboutmenu = new ApplicationBarMenuItem();
+            aboutmenu.Text = "バージョン情報";
+            ApplicationBar.MenuItems.Add(aboutmenu);
+            aboutmenu.Click += new EventHandler(AboutMenu_Click);
             /*
             ((ApplicationBarIconButton)ApplicationBar.Buttons[0]).IsEnabled = true;
             ((ApplicationBarIconButton)ApplicationBar.Buttons[1]).IsEnabled = true;
@@ -162,6 +167,11 @@ namespace PoqketNote
         private void ApplicationBarIconButton3_Click(object sender, EventArgs e)
         {
             this.Focus();
+        }
+
+        private void AboutMenu_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml?", UriKind.Relative));
         }
 
         private void filenameTextBox_GotFocus(object sender, RoutedEventArgs e)
