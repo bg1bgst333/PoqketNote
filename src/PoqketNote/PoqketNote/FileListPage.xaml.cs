@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 
 namespace PoqketNote
 {
@@ -23,18 +25,20 @@ namespace PoqketNote
         }
 
         public string flmessage;
+        private FileList fl = null;
 
-        private void listBox1_Loaded(object sender, RoutedEventArgs e)
+        private void Load()
         {
+
             IsolatedStorageFile storage = null;
-            FileList fl = new FileList();
+            fl = new FileList();
             //try
             //{
             storage = IsolatedStorageFile.GetUserStoreForApplication();
             //string[] d = storage.GetDirectoryNames();
             string[] filearray = storage.GetFileNames();
-                //string[] s;
-                //s = d;
+            //string[] s;
+            //s = d;
             if (filearray.Length > 0)
             {
                 foreach (var f in filearray)
@@ -53,17 +57,22 @@ namespace PoqketNote
             }
             listBox1.DataContext = fl;
             msgtext1.Text = flmessage;
-                //msgtext1.Visibility = Visibility.Visible;
+            //msgtext1.Visibility = Visibility.Visible;
             //}
             //catch(Exception ex)
             //{
-                //MessageBox.Show(ex.ToString());
+            //MessageBox.Show(ex.ToString());
 
             //}
             //finally
             //{
-                
+
             //}
+
+        }
+        private void listBox1_Loaded(object sender, RoutedEventArgs e)
+        {
+            Load();
         }
 
         private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -71,8 +80,70 @@ namespace PoqketNote
             FileData fd = (FileData)listBox1.SelectedItem;
             if (fd != null)
             {
+
+                ApplicationBar = new ApplicationBar();
+
+                ApplicationBarIconButton editbtn = new ApplicationBarIconButton();
+                editbtn.IconUri = new Uri("/icons/appbar.edit.rest.png", UriKind.Relative);
+                editbtn.Text = "編集";
+                ApplicationBar.Buttons.Add(editbtn);
+                editbtn.Click += new EventHandler(EditButton_Click);
+
+                ApplicationBarIconButton deletebtn = new ApplicationBarIconButton();
+                deletebtn.IconUri = new Uri("/icons/appbar.delete.rest.png", UriKind.Relative);
+                deletebtn.Text = "削除";
+                ApplicationBar.Buttons.Add(deletebtn);
+                deletebtn.Click += new EventHandler(DeleteButton_Click);
+
+                //NavigationService.Navigate(new Uri("/MainPage.xaml?path=" + fd.FileName, UriKind.Relative));
+            }
+            else
+            {
+                ApplicationBar.Buttons.Clear();
+            }
+
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            FileData fd = (FileData)listBox1.SelectedItem;
+            if (fd != null)
+            {
                 NavigationService.Navigate(new Uri("/MainPage.xaml?path=" + fd.FileName, UriKind.Relative));
             }
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            FileData fd = (FileData)listBox1.SelectedItem;
+            if (fd != null)
+            {
+                IsolatedStorageFile storage = null;
+
+                storage = IsolatedStorageFile.GetUserStoreForApplication();
+
+                if (storage.FileExists((fd.FileName)))
+                {
+                    MessageBoxResult r;
+                    r = MessageBox.Show("削除しますか?", "削除確認", MessageBoxButton.OKCancel);
+                    if (r == MessageBoxResult.Cancel)
+                    {
+                        return;
+                    }
+
+                    storage.DeleteFile(fd.FileName);
+
+                    fl.Files.RemoveAt(listBox1.SelectedIndex);
+                    //listBox1.UpdateLayout();
+                    Load();
+                    //NavigationService.Navigate(new Uri("/FileListPage.xaml?", UriKind.Relative));
+
+                }
+            }
+        }
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            base.OnBackKeyPress(e);
         }
     }
 }

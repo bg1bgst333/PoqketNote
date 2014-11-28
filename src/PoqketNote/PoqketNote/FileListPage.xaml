@@ -48,7 +48,9 @@
                 </ListBox.Template>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding FileName}" Margin="0" FontSize="32" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding FileName}" Margin="0" FontSize="32" Width="300"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

@@ -216,9 +216,14 @@ namespace PoqketNote
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             string path;
-
+            
             base.OnNavigatedTo(e);
 
+            //string qs = NavigationContext.ToString();
+            string es = e.Uri.ToString();
+            NavigationContext.QueryString.TryGetValue("path", out path);
+            //NavigationContext.QueryString.TryGetValue("btn", out btn);
+            //if (path != "" && path != null && btn == "edit")
             if (NavigationContext.QueryString.TryGetValue("path", out path))
             {
 
@@ -227,6 +232,15 @@ namespace PoqketNote
                 StreamReader sr = null;
 
                 storage = IsolatedStorageFile.GetUserStoreForApplication();
+
+                if (!storage.FileExists(path))
+                {
+                    string file = filenameTextBox.Text;
+                    string text = mainTextBox.Text;
+
+                    return;
+                    //MessageBox.Show(file);
+                }
 
                 using (stream = storage.OpenFile(path, FileMode.Open))
                 using (sr = new StreamReader(stream))
