@@ -113,7 +113,7 @@ namespace PoqketNote
         {
             if (filenameTextBox.Text == "")
             {
-                MessageBox.Show("ファイル名が入力されていません");
+                MessageBox.Show("ファイル名が入力されていません", "保存エラー", MessageBoxButton.OK);
                 return;
             }
 
@@ -126,7 +126,7 @@ namespace PoqketNote
             if (storage.FileExists((filenameTextBox.Text)))
             {
                 MessageBoxResult r;
-                r = MessageBox.Show("上書きしますか?", "上書き確認", MessageBoxButton.OKCancel);
+                r = MessageBox.Show("ファイルを上書きしますか?", "上書き確認", MessageBoxButton.OKCancel);
                 if (r == MessageBoxResult.Cancel)
                 {
                     return;
@@ -138,6 +138,8 @@ namespace PoqketNote
             {
                 sw.Write(mainTextBox.Text);
             }
+
+            MessageBox.Show("ファイルを保存しました", "保存成功", MessageBoxButton.OK);
 
         }
 
@@ -248,6 +250,8 @@ namespace PoqketNote
                     mainTextBox.Text = sr.ReadToEnd();
                     filenameTextBox.Text = path;
                 }
+
+                MessageBox.Show("ファイルを開きました", "読み込み成功", MessageBoxButton.OK);
 
             }
 

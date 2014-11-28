@@ -49,7 +49,7 @@ namespace PoqketNote
                     fd.FileName = f;
                     fl.Files.Add(fd);
                 }
-                flmessage = "読み込むファイルを選択してください";
+                flmessage = "ファイルを選択してください";
             }
             else
             {
@@ -125,13 +125,15 @@ namespace PoqketNote
                 if (storage.FileExists((fd.FileName)))
                 {
                     MessageBoxResult r;
-                    r = MessageBox.Show("削除しますか?", "削除確認", MessageBoxButton.OKCancel);
+                    r = MessageBox.Show("本当にファイルを削除しますか?", "削除確認", MessageBoxButton.OKCancel);
                     if (r == MessageBoxResult.Cancel)
                     {
                         return;
                     }
 
                     storage.DeleteFile(fd.FileName);
+
+                    MessageBox.Show("ファイルを削除しました", "削除成功", MessageBoxButton.OK);
 
                     fl.Files.RemoveAt(listBox1.SelectedIndex);
                     //listBox1.UpdateLayout();
