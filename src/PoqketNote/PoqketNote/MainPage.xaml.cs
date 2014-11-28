@@ -123,11 +123,22 @@ namespace PoqketNote
 
             storage = IsolatedStorageFile.GetUserStoreForApplication();
 
+            if (storage.FileExists((filenameTextBox.Text)))
+            {
+                MessageBoxResult r;
+                r = MessageBox.Show("上書きしますか?", "上書き確認", MessageBoxButton.OKCancel);
+                if (r == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+            }
+
             using(stream = storage.OpenFile(filenameTextBox.Text, FileMode.Create))
             using(sw = new StreamWriter(stream))
             {
                 sw.Write(mainTextBox.Text);
             }
+
         }
 
         private void ApplicationBarIconButton0_Click(object sender, EventArgs e)
