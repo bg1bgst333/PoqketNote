@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -117,6 +118,12 @@ namespace PoqketNote
                 return;
             }
 
+            if (filenameTextBox.Text == "__ApplicationSettings")
+            {
+                MessageBox.Show("このファイル名では保存できません", "保存エラー", MessageBoxButton.OK);
+                return;
+            }
+
             IsolatedStorageFile storage = null;
             IsolatedStorageFileStream stream = null;
             StreamWriter sw = null;
@@ -217,16 +224,24 @@ namespace PoqketNote
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string path;
+            //string path;
             
             base.OnNavigatedTo(e);
 
             //string qs = NavigationContext.ToString();
-            string es = e.Uri.ToString();
-            NavigationContext.QueryString.TryGetValue("path", out path);
+            //string es = e.Uri.ToString();
+            //NavigationContext.QueryString.TryGetValue("path", out path);
             //NavigationContext.QueryString.TryGetValue("btn", out btn);
             //if (path != "" && path != null && btn == "edit")
-            if (NavigationContext.QueryString.TryGetValue("path", out path))
+            //if (NavigationContext.QueryString.TryGetValue("path", out path))
+            IsolatedStorageSettings appstore = IsolatedStorageSettings.ApplicationSettings;
+            if (!appstore.Contains("command"))
+            {
+                return;
+            }
+            string val = Convert.ToString(appstore["command"]);
+            string fn = Convert.ToString(appstore["filename"]);
+            if (val == "edit" && (fn != null || fn != "-"))
             {
 
                 IsolatedStorageFile storage = null;
@@ -235,7 +250,7 @@ namespace PoqketNote
 
                 storage = IsolatedStorageFile.GetUserStoreForApplication();
 
-                if (!storage.FileExists(path))
+                if (!storage.FileExists(fn))
                 {
                     string file = filenameTextBox.Text;
                     string text = mainTextBox.Text;
@@ -244,17 +259,22 @@ namespace PoqketNote
                     //MessageBox.Show(file);
                 }
 
-                using (stream = storage.OpenFile(path, FileMode.Open))
+                using (stream = storage.OpenFile(fn, FileMode.Open))
                 using (sr = new StreamReader(stream))
                 {
                     mainTextBox.Text = sr.ReadToEnd();
-                    filenameTextBox.Text = path;
+                    filenameTextBox.Text = fn;
                 }
 
                 MessageBox.Show("ファイルを開きました", "読み込み成功", MessageBoxButton.OK);
 
             }
 
+        }
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            IsolatedStorageSettings appstore = IsolatedStorageSettings.ApplicationSettings;
+            appstore.Clear();
         }
     }
 }

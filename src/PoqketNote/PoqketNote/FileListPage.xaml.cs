@@ -37,8 +37,11 @@ namespace PoqketNote
             storage = IsolatedStorageFile.GetUserStoreForApplication();
             //string[] d = storage.GetDirectoryNames();
             string[] filearray = storage.GetFileNames();
+            List<string> ls = new List<string>(filearray);
+            ls.Remove("__ApplicationSettings");
             //string[] s;
             //s = d;
+            filearray = ls.ToArray();
             if (filearray.Length > 0)
             {
                 foreach (var f in filearray)
@@ -109,7 +112,11 @@ namespace PoqketNote
             FileData fd = (FileData)listBox1.SelectedItem;
             if (fd != null)
             {
-                NavigationService.Navigate(new Uri("/MainPage.xaml?path=" + fd.FileName, UriKind.Relative));
+                IsolatedStorageSettings appstore = IsolatedStorageSettings.ApplicationSettings;
+                appstore["command"] = "edit";
+                appstore["filename"] = fd.FileName;
+                NavigationService.GoBack();
+                //NavigationService.Navigate(new Uri("/MainPage.xaml?path=" + fd.FileName, UriKind.Relative));
             }
         }
 
@@ -145,6 +152,9 @@ namespace PoqketNote
         }
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
+            IsolatedStorageSettings appstore = IsolatedStorageSettings.ApplicationSettings;
+            appstore["command"] = "back";
+            appstore["filename"] = "-";
             base.OnBackKeyPress(e);
         }
     }

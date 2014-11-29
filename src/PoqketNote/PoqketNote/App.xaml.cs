@@ -26,6 +26,8 @@ namespace PoqketNote
         /// <summary>
         /// Application オブジェクトのコンストラクターです。
         /// </summary>
+        /// 
+        
         public App()
         {
             // キャッチできない例外のグローバル ハンドラーです。 
